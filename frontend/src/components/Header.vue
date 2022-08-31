@@ -8,26 +8,26 @@
         </span>
 
         <span id="title">
-            Área de estudo
+            ÁREA DE TRABALHO
         </span>
 
         <div id="menu-icon">
 
             <a href="#">
 
-                <div class="row menu-row">
+                <div class="menu-row">
                     <div class="item-menu"></div>
                     <div class="item-menu"></div>
                     <div class="item-menu"></div>
                 </div>
 
-                <div class="row menu-row">
+                <div class="menu-row">
                     <div class="item-menu"></div>
                     <div class="item-menu"></div>
                     <div class="item-menu"></div>
                 </div>
 
-                <div class="row menu-row">
+                <div class="menu-row">
                     <div class="item-menu"></div>
                     <div class="item-menu"></div>
                     <div class="item-menu"></div>
@@ -39,12 +39,19 @@
         
     </header>
 
+    <Sidebar/>
+
 </template>
   
 <script>
 
+import Sidebar from '@/components/Sidebar.vue'
+
 export default {
-    name: 'Header'
+    name: 'Header',
+    components:{
+        Sidebar
+    }
 }
 
 </script>
@@ -99,6 +106,7 @@ export default {
     }
 
     .menu-row{
+        display: flex;
         justify-content: space-between;
     }
 
@@ -106,7 +114,7 @@ export default {
         height: 7px;
         width: 7px;
         background-color: var(--secondary-color);
-        margin: 4px;
+        margin: 3px;
         border-radius: 2px;
     }
 
