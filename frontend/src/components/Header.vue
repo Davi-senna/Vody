@@ -1,6 +1,6 @@
 <template>
 
-    <header>
+    <header id="header-page">
         <span id="soon">
             <a href="#">
                 Vody
@@ -8,12 +8,12 @@
         </span>
 
         <span id="title">
-            ÁREA DE TRABALHO
+            ÁREA DE TRABALHO 
         </span>
 
         <div id="menu-icon">
 
-            <a href="#">
+            <a href="#" @click="menuVisibility=!menuVisibility">
 
                 <div class="menu-row">
                     <div class="item-menu"></div>
@@ -38,8 +38,8 @@
         </div>
         
     </header>
-
-    <Sidebar/>
+    <Sidebar :visibility=menuVisibility />
+    
 
 </template>
   
@@ -47,10 +47,21 @@
 
 import Sidebar from '@/components/Sidebar.vue'
 
+
 export default {
-    name: 'Header',
+    name: 'Header', 
     components:{
         Sidebar
+    },
+    data(){
+        return{
+            menuVisibility : false
+        }
+    },
+    methods:{
+        exchangeVisibilityMenu(){
+            this.menuVisibility = !menuVisibility;
+        }
     }
 }
 

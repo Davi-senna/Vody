@@ -7,13 +7,15 @@
 <script>
 
     import Header from '@/components/Header.vue';
+    import Date from '@/components/Date.vue';
 
     export default{
         name: "App",
         components: {
-            Header
+            Header,
+            Date
         }
-    }
+    }   
 
 </script>
 
@@ -23,6 +25,7 @@
         --main-color: rgb(0,0,0);
         --secondary-color: rgb(255,255,255);
         --grey-light-color: rgb(200,200,200);
+        --grey-color: #707070;
     }
 
     *{
