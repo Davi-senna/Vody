@@ -34,14 +34,14 @@ export default {
 <style scoped>
 
     #contentDate{
-        width: 50%;
+        width: 45%;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-end;
         font-family: 'Ubuntu', sans-serif;
-        padding-right: 10%;
+        padding-right: 5%;
         color : var(--main-color);
     }
 
