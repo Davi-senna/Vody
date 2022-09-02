@@ -1,6 +1,10 @@
 <template>
     	
     <Header/>
+    <section id="content">
+        <Date/>
+        <Stopwatch/>
+    </section>
 
 </template>
 
@@ -34,7 +38,11 @@
         box-sizing: border-box;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;700&display=swap');
 
+    #content{
+        height: 91vh;
+        width: 100%;
+    }
 
 </style>
