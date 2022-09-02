@@ -30,7 +30,7 @@ export default {
     },
     methods:{
         timeStart(){
-            interval = setInterval(()=>{ this.setTimer() },10)
+            interval = setInterval(()=>{ this.setTimer() },1000)
             this.stopwatchActive = true
         },
         format(){
