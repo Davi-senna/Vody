@@ -8,7 +8,7 @@
         </span>
 
         <span id="title">
-            ÁREA DE TRABALHO 
+            Área de trabalho 
         </span>
 
         <div id="menu-icon">

@@ -55,4 +55,21 @@ export default {
         font-size: 40px
     }
 
+    @media(max-width: 950px){
+
+        #contentDate{
+            width: 100vw;
+            height: 20vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            font-family: 'Ubuntu', sans-serif;
+            padding-right: 5%;
+            color: var(--main-color);
+            position: absolute;
+            top: 75vh;
+        }
+    }
+
 </style>

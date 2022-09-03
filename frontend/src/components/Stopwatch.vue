@@ -106,6 +106,10 @@ button {
     font-weight: 500;
 }
 
+#button-start:hover{
+    font-size: 65px;
+}
+
 #button-stop {
     font-size: 30px;
 }
@@ -134,6 +138,19 @@ span {
 
     to {
         transform: rotateZ(90deg);
+    }
+}
+
+@media(max-width: 950px){
+    #stopwatch{
+        width: 100vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        font-family: 'Ubuntu', sans-serif;
+        color: var(--main-color);
+        position: absolute;
+        justify-content: center;
     }
 }
 </style>

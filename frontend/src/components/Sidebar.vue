@@ -72,8 +72,9 @@
         top: 0;
         display: flex;
         justify-content: flex-end;
-        grid-template-columns: auto 250px;
         overflow: hidden;
+        z-index: 99;
+
     }
 
     #menu-close{
