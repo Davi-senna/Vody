@@ -49,7 +49,22 @@
         width: 250px;
         height: 100%;
         border-top: 1px solid var(--grey-color);
+        position: absolute;
+        animation-name: menu;
+        animation-duration: 0.5s;
     }
+
+    @keyframes menu {
+    from {
+        right: -250px;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+
 
     ul{ 
         list-style: none;
