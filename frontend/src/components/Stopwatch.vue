@@ -7,12 +7,12 @@
             <button @click="timeStop()" v-if="stopwatchActive" id="button-stop">Parar</button>
         </div>
         <figure>
-            <img id="settings"
+            <img @click="exchangeVisibilitySettings()" id="settings"
                 src="@/assets/img/configuration_control_gear_preferences_setting_settings_tools_icon_123195.png" alt="">
         </figure>
     </div>
 
-    <SettingsModal />
+    <SettingsModal v-if="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings"/>
 
 </template>
 
@@ -31,6 +31,7 @@ export default {
             minutes: 0,
             seconds: 0,
             stopwatchActive: false,
+            settingsVisibility: false,
             
         }
     },
@@ -75,6 +76,9 @@ export default {
             if(hours == "hours"){
                 this.hours = 0
             }
+        },
+        exchangeVisibilitySettings(){
+            this.settingsVisibility = !this.settingsVisibility;
         }
     },
     components:{
