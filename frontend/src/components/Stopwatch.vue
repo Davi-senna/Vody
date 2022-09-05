@@ -12,10 +12,16 @@
         </figure>
     </div>
 
+    <SettingsModal />
+
 </template>
 
 <script>
-    var interval
+
+import SettingsModal from '@/components/SettingsModal.vue'
+
+var interval
+
 export default {
     name: "Stopwatch",
     data() {
@@ -70,6 +76,9 @@ export default {
                 this.hours = 0
             }
         }
+    },
+    components:{
+        SettingsModal
     }
 }
 
@@ -106,7 +115,7 @@ button {
     font-weight: 500;
 }
 
-#button-start:hover{
+#button-start:hover {
     font-size: 65px;
 }
 
@@ -122,14 +131,14 @@ span {
 #settings {
     width: 60px;
     margin-left: 10px;
-    
+
 }
 
 #settings:hover {
     cursor: pointer;
     animation-name: settings;
     animation-duration: 0.5s;
-    }
+}
 
 @keyframes settings {
     from {
@@ -141,8 +150,8 @@ span {
     }
 }
 
-@media(max-width: 950px){
-    #stopwatch{
+@media(max-width: 950px) {
+    #stopwatch {
         width: 100vw;
         height: 80vh;
         display: flex;
