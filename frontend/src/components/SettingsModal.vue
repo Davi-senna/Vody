@@ -75,9 +75,8 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-direction: column;
-    height: 180px;
+    height: 190px;
 }
 
 select,
@@ -87,6 +86,7 @@ input {
     border-radius: 5px;
     padding-left: 20px;
     border: 1px solid;
+    margin-bottom: 25px;
 }
 
 option {
@@ -100,6 +100,7 @@ option {
 #modal-button{
     width: 60%;
     padding-left: 0;
+    margin-bottom: 0;
 }
 
 #modal-button:hover{
