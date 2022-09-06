@@ -13,7 +13,7 @@
                     <option value="pattern">Padrão</option>
                 </select>
                 <input type="number" min="0" name="hourValue" id="hourValue" placeholder="Valor hora">
-                <input id="modal-button" type="submit">
+                <input id="modal-button" type="submit" value="Salvar">
             </form>
         </div>
     </div>
