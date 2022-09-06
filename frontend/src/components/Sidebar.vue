@@ -1,25 +1,26 @@
 <template>
 
     <div v-if="visibility" id="menu-container">
+        <div @click="$emit('exchangeVisibility')" id="back-menu"></div>
         <nav>
             <div id="menu-title" class="menu-item">Menu</div>
             <ul>
 
                 <li>
                     <a href="" class="menu-item menu-link">
-                        Início  
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="" class="menu-item menu-link">
-                        Relatórios  
+                        Início
                     </a>
                 </li>
 
                 <li>
                     <a href="" class="menu-item menu-link">
-                        Configurações  
+                        Relatórios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="" class="menu-item menu-link">
+                        Configurações
                     </a>
                 </li>
 
@@ -34,27 +35,27 @@
 </template>
 
 <script>
-    export default{
-        name: 'Sidebar',
-        props: {
-            visibility: Boolean,
-        }        
-    }
+export default {
+    name: 'Sidebar',
+    props: {
+        visibility: Boolean,
+    },
+    emits:['exchangeVisibility']
+}
 </script>
 
 <style scoped>
+nav {
+    background-color: var(--main-color);
+    width: 250px;
+    height: 100%;
+    border-top: 1px solid var(--grey-color);
+    position: absolute;
+    animation-name: menu;
+    animation-duration: 0.5s;
+}
 
-    nav{
-        background-color: var(--main-color);
-        width: 250px;
-        height: 100%;
-        border-top: 1px solid var(--grey-color);
-        position: absolute;
-        animation-name: menu;
-        animation-duration: 0.5s;
-    }
-
-    @keyframes menu {
+@keyframes menu {
     from {
         right: -250px;
     }
@@ -64,99 +65,104 @@
     }
 }
 
+#back-menu {
+    width: 72%;
+    margin-right: 250px;
+}
 
 
-    ul{ 
-        list-style: none;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-    }
 
-    a{
-        text-decoration:none;
-    }
+ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
 
-    #menu-container{
-        width: 100vw;
-        height: 91vh;
-        margin-top: 9vh;
-        position: absolute;
-        top: 0;
-        display: flex;
-        justify-content: flex-end;
-        overflow: hidden;
-        z-index: 99;
+a {
+    text-decoration: none;
+}
 
-    }
+#menu-container {
+    width: 100vw;
+    height: 91vh;
+    margin-top: 9vh;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+    z-index: 99;
+    grid-template-columns: auto 250px;
 
-    #menu-close{
-        width: 72%;
-    }
+}
 
-    #menu-close:hover{
-        cursor: pointer;
-    }
+#menu-close {
+    width: 72%;
+}
 
-    .menu-item{
-        text-decoration:none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-    }
+#menu-close:hover {
+    cursor: pointer;
+}
 
-    #menu-title{
-        font-weight: 600;
-        height: 17vh;
-        color: var(--secondary-color);
-        border-bottom: 1px solid var(--grey-color);
-        width: 100%;
-    }
+.menu-item {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
 
-    .menu-link{
-        width: 80%;
-        height: 60px;
-        color: var(--secondary-color);
-        background-color: transparent;
-        border-radius: 10px;
-        border: 1px solid var(--secondary-color);
-    }
+#menu-title {
+    font-weight: 600;
+    height: 17vh;
+    color: var(--secondary-color);
+    border-bottom: 1px solid var(--grey-color);
+    width: 100%;
+}
 
-    .menu-link:hover{
-        color: var(--main-color);
-        background-color: var(--secondary-color);
-        border-radius: 10px;
-        border: 1px solid var(--secondary-color);
-        transition: .4s;
-    }
+.menu-link {
+    width: 80%;
+    height: 60px;
+    color: var(--secondary-color);
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+}
 
-    li{
-        display: flex;
-        justify-content: center;
-        margin-top: 6.5vh;
-    }
+.menu-link:hover {
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border: 1px solid var(--secondary-color);
+    transition: .4s;
+}
 
-    #menu-footer{
-        margin-top: 6.5vh;
-        border-top: 1px solid var(--grey-color);
-        height: 22vh;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
+li {
+    display: flex;
+    justify-content: center;
+    margin-top: 6.5vh;
+}
 
-    }
+#menu-footer {
+    margin-top: 6.5vh;
+    border-top: 1px solid var(--grey-color);
+    height: 22vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
 
-    #menu-footer a{
-        color: var(--secondary-color);
-    }
+}
 
-    #menu-footer img{
-        width: 35px 
-    }
+#menu-footer a {
+    color: var(--secondary-color);
+}
 
+#menu-footer img {
+    width: 35px
+}
 </style>

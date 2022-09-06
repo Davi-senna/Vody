@@ -38,7 +38,7 @@
         </div>
         
     </header>
-    <Sidebar :visibility=menuVisibility />
+    <Sidebar @exchangeVisibility="exchangeVisibilityMenu" :visibility=menuVisibility />
     
 
 </template>
@@ -60,7 +60,7 @@ export default {
     },
     methods:{
         exchangeVisibilityMenu(){
-            this.menuVisibility = !menuVisibility;
+            this.menuVisibility = !this.menuVisibility;
         }
     }
 }
