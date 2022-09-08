@@ -27,21 +27,43 @@
             </ul>
 
             <div id="menu-footer">
-                <a href="#">Entrar <img src="../../src/assets/img/Login-icon.png" alt="Fazer login"></a>
+                <a @click="exchangeVisibilityLogin()">Entrar<img src="../../src/assets/img/Login-icon.png" alt="Fazer login"></a>
             </div>
         </nav>
     </div>
 
+    <LoginModal @exchangeVisibility="exchangeVisibilityLogin" v-if="LoginVisibility"/>
+    <RegisterModal @exchangeVisibility="exchangeVisibilitRegister" v-if="RegisterVisibility"/>
 </template>
 
 <script>
+
+import LoginModal from '@/components/LoginModal.vue'
+import RegisterModal from '@/components/RegisterModal.vue'
+
 export default {
     name: 'Sidebar',
     props: {
         visibility: Boolean,
     },
-    emits:['exchangeVisibility']
+    emits:['exchangeVisibility'],
+    components:{
+        LoginModal,
+        RegisterModal,
+    },
+    data(){
+        return {
+            LoginVisibility: false,
+            RegisterVisibility: false,
+        }
+    },
+    methods:{
+        exchangeVisibilityLogin(){
+            this.LoginVisibility = !this.LoginVisibility
+        }
+    }
 }
+
 </script>
 
 <style scoped>
@@ -83,6 +105,10 @@ ul {
 
 a {
     text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
 }
 
 #menu-container {
