@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('log', function (Blueprint $table) {
             $table->id();
-            $table->integer('hour_value');
+            $table->float('hour_value');
+            $table->integer('seconds');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('user');
             $table->unsignedBigInteger('id_category');
