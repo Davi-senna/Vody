@@ -3,15 +3,15 @@
     <div id="container-modal">
         <div id="modal">
             <div id="modal-header">
-                <span id="modal-title">Fazer login</span>
+                <span id="modal-title">Fazer Cadastro</span>
                 <span @click="$emit('exchangeVisibility')" id="modal-back">X</span>
             </div>
 
             <form id="container-inputs">
+                <input type="text" name="name" id="name" placeholder="Nome completo">
                 <input type="text" name="login" id="login" placeholder="Login">
                 <input type="password"  name="Password" id="Password" placeholder="Senha">
                 <input id="modal-button" type="submit" value="Entrar">
-                <a>Não tenho uma conta</a>
             </form>
             
         </div>
@@ -37,7 +37,7 @@
     align-items: center;
     font-family: 'Ubuntu', sans-serif;
     color: var(--main-color);
-    z-index: 100;
+    z-index: 101;
 }
 
 #modal {
@@ -47,7 +47,7 @@
     animation-name: modal;
     animation-duration: 0.3s;
     width: 450px;
-    height: 300px;
+    height: 400px;
 
 }
 
@@ -80,7 +80,6 @@ a:hover{
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 190px;
 }
 
 select,

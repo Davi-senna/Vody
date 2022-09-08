@@ -32,8 +32,8 @@
         </nav>
     </div>
 
-    <LoginModal @exchangeVisibility="exchangeVisibilityLogin" v-if="LoginVisibility"/>
-    <RegisterModal @exchangeVisibility="exchangeVisibilitRegister" v-if="RegisterVisibility"/>
+    <LoginModal @register="register" @exchangeVisibility="exchangeVisibilityLogin" v-if="LoginVisibility"/>
+    <RegisterModal @exchangeVisibility="exchangeVisibilityRegister" v-if="RegisterVisibility"/>
 </template>
 
 <script>
@@ -60,6 +60,13 @@ export default {
     methods:{
         exchangeVisibilityLogin(){
             this.LoginVisibility = !this.LoginVisibility
+        },
+        register(){
+            this.exchangeVisibilityLogin()
+            this.RegisterVisibility = !this.RegisterVisibility 
+        },
+        exchangeVisibilityRegister(){
+            this.RegisterVisibility = !this.RegisterVisibility
         }
     }
 }

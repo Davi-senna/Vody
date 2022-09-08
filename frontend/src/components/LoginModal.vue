@@ -11,7 +11,7 @@
                 <input type="text" name="login" id="login" placeholder="Login">
                 <input type="password"  name="Password" id="Password" placeholder="Senha">
                 <input id="modal-button" type="submit" value="Entrar">
-                <a>Não tenho uma conta</a>
+                <a @click="$emit('register')">Não tenho uma conta</a>
             </form>
             
         </div>
@@ -22,7 +22,7 @@
 <script>
     export default{
         name: "SettingsModal",
-        emits: ['exchangeVisibility']
+        emits: ['exchangeVisibility','register']
     }
 </script>
 
