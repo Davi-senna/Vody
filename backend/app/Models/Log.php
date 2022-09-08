@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Log extends Model
 {
     use HasFactory;
+    protected $table='log';
+    protected $fillable=[
+        'hour_value',
+        'id_user',
+        'id_category',
+        'status',
+    ];
 }
