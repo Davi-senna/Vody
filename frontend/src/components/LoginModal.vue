@@ -9,6 +9,7 @@
 
             <form @submit="auth" id="container-inputs">
                 <input type="text" name="login" id="login" v-model="login" placeholder="Login">
+                <span class="error" v-if="error!=null">{{error}}</span>
                 <input type="password" name="Password" id="Password" v-model="password" placeholder="Senha">
                 <input id="modal-button" type="submit" value="Entrar">
                 <a @click="$emit('register')">Não tenho uma conta</a>
@@ -35,17 +36,9 @@ export default {
             e.preventDefault();
             if (this.login != null && this.password != null){
 
-                const data = {
-                    login: this.login,
-                    password: this.password
-                }
-
-                const dataJson = JSON.stringify(data)
-
-                const request = await fetch("http://localhost:8000/api/auth", {
+                const request = await fetch(`http://localhost:8000/api/auth/${this.login}/${this.password}`, {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
-                    param: dataJson
                 })
 
                 const response = await request.json();
@@ -60,10 +53,14 @@ export default {
                 }
 
             }else{
-
+                this.error = "Preencha todos os campos"
             }
 
         },
+        reset(){
+            this.login = null
+            this.password = null
+        }
     }
 }
 </script>
@@ -120,12 +117,18 @@ a:hover {
     font-size: 20px;
 }
 
+.error{
+    color: red;
+}
+
 #container-inputs {
     margin-top: 30px;
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-direction: column;
+    height: 220px;
 }
 
 select,
@@ -135,7 +138,6 @@ input {
     border-radius: 5px;
     padding-left: 20px;
     border: 1px solid;
-    margin-bottom: 25px;
 }
 
 option {

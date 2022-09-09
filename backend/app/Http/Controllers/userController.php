@@ -41,7 +41,22 @@ class userController extends Controller
         }
     }
 
-    public function auth(Request $request){
-        return json_encode("entoru");
+    public function auth($login, $password){
+        
+        try {
+            
+            $result = User::where(['login' => $login, 'password' => $password])->get();
+            if(count($result) > 0){
+                return json_encode(["name" => $result[0]["name"], "id" => $result[0]["id"],"success" => true]);
+            }else{
+                return json_encode(["success" => false, "message" => "Usuário ou senha invalida"]);
+            }
+
+        } catch (\Throwable $e) {
+            return json_encode(["success" => false, "message" => $e->getMessage()]);
+        }
+        
     }
+
+    
 }
