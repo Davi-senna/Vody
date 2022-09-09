@@ -47,7 +47,7 @@
     animation-name: modal;
     animation-duration: 0.3s;
     width: 450px;
-    height: 300px;
+    height: 320px;
 
 }
 
@@ -61,6 +61,10 @@
         width: 450px;
         height: 300px;
     }
+}
+
+a{
+    margin-top:10px
 }
 
 a:hover{
@@ -80,13 +84,12 @@ a:hover{
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 190px;
 }
 
 select,
 input {
     width: 90%;
-    height: 6vh;
+    height: 45px;
     border-radius: 5px;
     padding-left: 20px;
     border: 1px solid;

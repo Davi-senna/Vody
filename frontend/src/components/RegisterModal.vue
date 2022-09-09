@@ -7,23 +7,70 @@
                 <span @click="$emit('exchangeVisibility')" id="modal-back">X</span>
             </div>
 
-            <form id="container-inputs">
-                <input type="text" name="name" id="name" placeholder="Nome completo">
-                <input type="text" name="login" id="login" placeholder="Login">
-                <input type="password"  name="Password" id="Password" placeholder="Senha">
+            <form id="container-inputs" @submit="userRegister">
+                <input type="text" name="name" id="name" v-model="name" placeholder="Nome completo">
+                <input type="text" name="login" id="login" v-model="login" placeholder="Login">
+                <input type="password" name="password" id="password" v-model="password" placeholder="Senha">
                 <input id="modal-button" type="submit" value="Entrar">
+                <span class="error" v-if="error!=null">{{error}}</span>
             </form>
-            
+
         </div>
     </div>
 
 </template>
 
 <script>
-    export default{
-        name: "SettingsModal",
-        emits: ['exchangeVisibility']
+export default {
+    name: "SettingsModal",
+    emits: ['exchangeVisibility'],
+    data() {
+        return {
+            "name": null,
+            "login": null,
+            "password": null,
+            "error" : null,
+        }
+    },
+    methods: {
+        async userRegister(e) {
+            e.preventDefault();
+            if (this.name != null && this.login != null && this.password != null) {
+                const user = {
+                    name: this.name,
+                    login: this.login,
+                    password: this.password,
+                    status: true
+                }
+
+                const userJson = JSON.stringify(user)
+
+                const req = await fetch("http://localhost:8000/api/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: userJson
+                })
+
+                const resp = await req.json();
+                console.log(resp);
+                if(resp.success){
+                    this.$emit('exchangeVisibility')
+                }else{
+                    this.error = "Usuário já existe"
+                    this.reset()
+                }
+            }else{
+                this.error = "Preencha todos os campos"
+                this.reset()
+            }
+        },
+        reset(){
+            this.name = null
+            this.login = null
+            this.password = null
+        }
     }
+}
 </script>
 
 <style scoped>
@@ -47,7 +94,7 @@
     animation-name: modal;
     animation-duration: 0.3s;
     width: 450px;
-    height: 400px;
+    height: 380px;
 
 }
 
@@ -63,9 +110,9 @@
     }
 }
 
-a:hover{
+a:hover {
     cursor: pointer;
-    }
+}
 
 #modal-header {
     display: flex;
@@ -92,6 +139,11 @@ input {
     margin-bottom: 25px;
 }
 
+.error{
+    margin: 5px 0;
+    color: red;
+}
+
 option {
     color: var(--main-color)
 }
@@ -100,13 +152,13 @@ option {
     cursor: pointer;
 }
 
-#modal-button{
+#modal-button {
     width: 60%;
     padding-left: 0;
     margin-bottom: 0;
 }
 
-#modal-button:hover{
+#modal-button:hover {
     background-color: var(--main-color);
     color: var(--secondary-color)
 }
