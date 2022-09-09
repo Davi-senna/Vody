@@ -27,7 +27,7 @@ class userController extends Controller
                 'id' => $show['id'],
             ];
 
-            echo json_encode($validate);
+            return $validate;
 
         } catch (\Throwable $e) {
 
@@ -37,7 +37,11 @@ class userController extends Controller
                 'error' => $e->getMessage(),
             ];
 
-            echo json_encode($validate);
+            return $validate;
         }
+    }
+
+    public function auth(Request $request){
+        return json_encode("entoru");
     }
 }

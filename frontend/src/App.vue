@@ -30,7 +30,7 @@
 
     :root{
         --main-color: rgb(0, 0, 0);
-        --secondary-color: rgb(255,255,255);
+        --secondary-color: rgb(255, 255, 255);
         --grey-light-color: rgb(200,200,200);
         --grey-color: #707070;
     }

@@ -7,23 +7,65 @@
                 <span @click="$emit('exchangeVisibility')" id="modal-back">X</span>
             </div>
 
-            <form id="container-inputs">
-                <input type="text" name="login" id="login" placeholder="Login">
-                <input type="password"  name="Password" id="Password" placeholder="Senha">
+            <form @submit="auth" id="container-inputs">
+                <input type="text" name="login" id="login" v-model="login" placeholder="Login">
+                <input type="password" name="Password" id="Password" v-model="password" placeholder="Senha">
                 <input id="modal-button" type="submit" value="Entrar">
                 <a @click="$emit('register')">Não tenho uma conta</a>
             </form>
-            
+
         </div>
     </div>
 
 </template>
 
 <script>
-    export default{
-        name: "SettingsModal",
-        emits: ['exchangeVisibility','register']
+export default {
+    name: "SettingsModal",
+    emits: ['exchangeVisibility', 'register'],
+    data() {
+        return {
+            login: null,
+            password: null,
+            error : null
+        }
+    },
+    methods: {
+        async auth(e) {
+            e.preventDefault();
+            if (this.login != null && this.password != null){
+
+                const data = {
+                    login: this.login,
+                    password: this.password
+                }
+
+                const dataJson = JSON.stringify(data)
+
+                const request = await fetch("http://localhost:8000/api/auth", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    param: dataJson
+                })
+
+                const response = await request.json();
+
+                console.log(response)
+
+                if(response.success){
+                    this.$emit('exchangeVisibility')
+                }else{
+                    this.error = "Usuário ou senha incorreta"
+                    this.reset()
+                }
+
+            }else{
+
+            }
+
+        },
     }
+}
 </script>
 
 <style scoped>
@@ -63,13 +105,13 @@
     }
 }
 
-a{
-    margin-top:10px
+a {
+    margin-top: 10px
 }
 
-a:hover{
+a:hover {
     cursor: pointer;
-    }
+}
 
 #modal-header {
     display: flex;
@@ -104,13 +146,13 @@ option {
     cursor: pointer;
 }
 
-#modal-button{
+#modal-button {
     width: 60%;
     padding-left: 0;
     margin-bottom: 0;
 }
 
-#modal-button:hover{
+#modal-button:hover {
     background-color: var(--main-color);
     color: var(--secondary-color)
 }
