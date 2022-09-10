@@ -1,7 +1,7 @@
 <template>
     
     	
-    <Header/>
+    <Header @situationExchangeLogged="situationExchangeLogged"/>
     <section id="content">
         <Date/>
         <Stopwatch/>
@@ -11,16 +11,26 @@
 
 <script>
 
-    import Header from '@/components/Header.vue';
-    import Date from '@/components/Date.vue';
-    import Stopwatch from '@/components/Stopwatch.vue';
+    import Header from '@/components/Header.vue'
+    import Date from '@/components/Date.vue'
+    import Stopwatch from '@/components/Stopwatch.vue'
 
     export default{
         name: "App",
+        data(){
+            return {
+                logged: false
+            }
+        },
         components: {
             Header,
             Date,
             Stopwatch,
+        },
+        methods:{
+            situationExchangeLogged(){
+                this.logged = !this.logged
+            }
         }
     }   
 

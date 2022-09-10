@@ -38,7 +38,7 @@
         </div>
         
     </header>
-    <Sidebar @exchangeVisibility="exchangeVisibilityMenu" :visibility=menuVisibility />
+    <Sidebar @situationExchangeLogged="situationExchangeLogged" @exchangeVisibility="exchangeVisibilityMenu" :visibility=menuVisibility />
     
 
 </template>
@@ -53,6 +53,7 @@ export default {
     components:{
         Sidebar
     },
+    emits: ['situationExchangeLogged'],
     data(){
         return{
             menuVisibility : false
@@ -61,6 +62,9 @@ export default {
     methods:{
         exchangeVisibilityMenu(){
             this.menuVisibility = !this.menuVisibility;
+        },
+        situationExchangeLogged(){
+            this.$emit('situationExchangeLogged');
         }
     }
 }

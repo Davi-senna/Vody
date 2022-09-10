@@ -27,13 +27,14 @@
             </ul>
 
             <div id="menu-footer">
-                <a @click="exchangeVisibilityLogin()">Entrar<img src="../../src/assets/img/Login-icon.png" alt="Fazer login"></a>
+                <a v-if="!logged" @click="exchangeVisibilityLogin()">Entrar<img src="../../src/assets/img/Login-icon.png" alt="Fazer login"></a>
+                <a v-if="logged">Sair<img src="../../src/assets/img/Logout-icon.png" alt="sair"></a>
             </div>
         </nav>
     </div>
 
-    <LoginModal @register="register" @exchangeVisibility="exchangeVisibilityLogin" v-if="LoginVisibility"/>
-    <RegisterModal @exchangeVisibility="exchangeVisibilityRegister" v-if="RegisterVisibility"/>
+    <LoginModal @situationExchangeLogged="situationExchangeLogged" @register="register" @exchangeVisibility="exchangeVisibilityLogin" v-show="LoginVisibility"/>
+    <RegisterModal @exchangeVisibility="exchangeVisibilityRegister" v-show="RegisterVisibility"/>
 </template>
 
 <script>
@@ -46,7 +47,7 @@ export default {
     props: {
         visibility: Boolean,
     },
-    emits:['exchangeVisibility'],
+    emits:['exchangeVisibility','situationExchangeLogged'],
     components:{
         LoginModal,
         RegisterModal,
@@ -55,6 +56,7 @@ export default {
         return {
             LoginVisibility: false,
             RegisterVisibility: false,
+            logged: false,
         }
     },
     methods:{
@@ -67,6 +69,11 @@ export default {
         },
         exchangeVisibilityRegister(){
             this.RegisterVisibility = !this.RegisterVisibility
+        },
+        situationExchangeLogged(){
+            this.logged = !this.logged;
+            this.$emit('situationExchangeLogged');
+            
         }
     }
 }

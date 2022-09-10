@@ -12,7 +12,7 @@
                 <span class="error" v-if="error!=null">{{error}}</span>
                 <input type="password" name="Password" id="Password" v-model="password" placeholder="Senha">
                 <input id="modal-button" type="submit" value="Entrar">
-                <a @click="$emit('register')">Não tenho uma conta</a>
+                <a @click="$emit('register')">{{logged}}</a>
             </form>
 
         </div>
@@ -23,18 +23,19 @@
 <script>
 export default {
     name: "SettingsModal",
-    emits: ['exchangeVisibility', 'register'],
+    emits: ['exchangeVisibility', 'register','situationExchangeLogged'],
     data() {
         return {
             login: null,
             password: null,
-            error : null
+            error: null,
+            logged: false,
         }
     },
     methods: {
         async auth(e) {
             e.preventDefault();
-            if (this.login != null && this.password != null){
+            if (this.login != null && this.password != null) {
 
                 const request = await fetch(`http://localhost:8000/api/auth/${this.login}/${this.password}`, {
                     method: "GET",
@@ -45,22 +46,28 @@ export default {
 
                 console.log(response)
 
-                if(response.success){
+                if (response.success) {
+                    this.logged = true;
                     this.$emit('exchangeVisibility')
-                }else{
+                } else {
                     this.error = "Usuário ou senha incorreta"
                     this.reset()
                 }
 
-            }else{
+            } else {
                 this.error = "Preencha todos os campos"
             }
 
         },
-        reset(){
+        reset() {
             this.login = null
             this.password = null
         }
+    },
+    watch: {
+        logged(){
+            this.$emit('situationExchangeLogged')
+        },
     }
 }
 </script>
@@ -117,7 +124,7 @@ a:hover {
     font-size: 20px;
 }
 
-.error{
+.error {
     color: red;
 }
 
