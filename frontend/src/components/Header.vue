@@ -63,8 +63,8 @@ export default {
         exchangeVisibilityMenu(){
             this.menuVisibility = !this.menuVisibility;
         },
-        situationExchangeLogged(){
-            this.$emit('situationExchangeLogged');
+        situationExchangeLogged(params){
+            this.$emit('situationExchangeLogged',params);
         }
     }
 }

@@ -19,7 +19,11 @@
         name: "App",
         data(){
             return {
-                logged: false
+                logged: false,
+                id: null,
+                name: null,
+                login: null,
+                password: null,
             }
         },
         components: {
@@ -28,8 +32,12 @@
             Stopwatch,
         },
         methods:{
-            situationExchangeLogged(){
+            situationExchangeLogged(params){
                 this.logged = !this.logged
+                this.id = params.id
+                this.name = params.name
+                this.login = params.login
+                this.password = params.password
             }
         }
     }   

@@ -70,9 +70,9 @@ export default {
         exchangeVisibilityRegister(){
             this.RegisterVisibility = !this.RegisterVisibility
         },
-        situationExchangeLogged(){
+        situationExchangeLogged(params){
             this.logged = !this.logged;
-            this.$emit('situationExchangeLogged');
+            this.$emit('situationExchangeLogged',params);
             
         }
     }

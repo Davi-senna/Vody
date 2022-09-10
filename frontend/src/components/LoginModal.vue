@@ -26,6 +26,7 @@ export default {
     emits: ['exchangeVisibility', 'register','situationExchangeLogged'],
     data() {
         return {
+            id: null,
             login: null,
             password: null,
             error: null,
@@ -48,6 +49,7 @@ export default {
 
                 if (response.success) {
                     this.logged = true;
+                    this.id = response.id;
                     this.$emit('exchangeVisibility')
                 } else {
                     this.error = "Usuário ou senha incorreta"
@@ -66,7 +68,7 @@ export default {
     },
     watch: {
         logged(){
-            this.$emit('situationExchangeLogged')
+            this.$emit('situationExchangeLogged',{id: this.id, logins: this.login, password : this.password})
         },
     }
 }
