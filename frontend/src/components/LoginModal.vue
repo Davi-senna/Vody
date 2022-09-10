@@ -12,7 +12,7 @@
                 <span class="error" v-if="error!=null">{{error}}</span>
                 <input type="password" name="Password" id="Password" v-model="password" placeholder="Senha">
                 <input id="modal-button" type="submit" value="Entrar">
-                <a @click="$emit('register')">{{logged}}</a>
+                <a @click="$emit('register')">Não tenho uma conta</a>
             </form>
 
         </div>

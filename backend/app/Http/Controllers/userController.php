@@ -7,7 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 
-class userController extends Controller
+class UserController extends Controller
 {
     public function store(Request $request){
         try {
