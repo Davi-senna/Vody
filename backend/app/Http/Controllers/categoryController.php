@@ -13,7 +13,7 @@ class CategoryController extends Controller
 
         $authentication = json_decode($user->auth($login,$password));
         if($authentication->success){
-            $result = Category::where(['id_user' => $id])->select('name')->get();
+            $result = Category::where(['id_user' => $id])->select('id','name')->get();
             return json_encode([
                 "success" => true,
                 "data" => $result

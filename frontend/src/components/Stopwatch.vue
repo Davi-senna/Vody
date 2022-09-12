@@ -12,7 +12,7 @@
         </figure>
     </div>
 
-    <SettingsModal v-if="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings"/>
+    <SettingsModal v-if="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings" />
 
 </template>
 
@@ -32,56 +32,56 @@ export default {
             seconds: 0,
             stopwatchActive: false,
             settingsVisibility: false,
-            
+            categories: null
+
         }
     },
-    methods:{
-        timeStart(){
-            interval = setInterval(()=>{ this.setTimer() },1000)
+    methods: {
+        timeStart() {
+            interval = setInterval(() => { this.setTimer() }, 1000)
             this.stopwatchActive = true
         },
-        format(){
-            this.time = (this.hours<10? "0" + this.hours : this.hours) + " : " + (this.minutes<10? "0" + this.minutes : this.minutes) + " : " + (this.seconds<10? "0" + this.seconds : this.seconds)
+        format() {
+            this.time = (this.hours < 10 ? "0" + this.hours : this.hours) + " : " + (this.minutes < 10 ? "0" + this.minutes : this.minutes) + " : " + (this.seconds < 10 ? "0" + this.seconds : this.seconds)
         },
-        setTimer(){
-            if(this.seconds<59){
+        setTimer() {
+            if (this.seconds < 59) {
                 this.seconds += 1
                 this.format()
-            }else if(this.seconds == 59 && this.minutes<59){
+            } else if (this.seconds == 59 && this.minutes < 59) {
                 this.setZero("seconds")
                 this.minutes += 1
                 this.format()
-            }else{
-                this.setZero("seconds","minutes")
+            } else {
+                this.setZero("seconds", "minutes")
                 this.hours += 1
                 this.format()
             }
         },
-        timeStop(){
+        timeStop() {
             clearInterval(interval);
-            this.setZero("seconds","minutes","hours")
+            this.setZero("seconds", "minutes", "hours")
             this.format()
             this.stopwatchActive = false
-
         },
-        setZero(seconds,minutes = "",hours = ""){
-            if(seconds == "seconds"){
+        setZero(seconds, minutes = "", hours = "") {
+            if (seconds == "seconds") {
                 this.seconds = 0
             }
 
-            if(minutes == "minutes"){
-                this.minutes= 0
+            if (minutes == "minutes") {
+                this.minutes = 0
             }
 
-            if(hours == "hours"){
+            if (hours == "hours") {
                 this.hours = 0
             }
         },
-        exchangeVisibilitySettings(){
+        exchangeVisibilitySettings() {
             this.settingsVisibility = !this.settingsVisibility;
         }
     },
-    components:{
+    components: {
         SettingsModal
     }
 }
