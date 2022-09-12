@@ -4,7 +4,7 @@
     <Header @situationExchangeLogged="situationExchangeLogged"/>
     <section id="content">
         <Date/>
-        <Stopwatch/>
+        <Stopwatch :logged = logged :login = login :password = password :id = id />
     </section>
 
 </template>

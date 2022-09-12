@@ -12,7 +12,7 @@
         </figure>
     </div>
 
-    <SettingsModal v-if="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings" />
+    <SettingsModal :logged = logged :login = login :password = password :id = id v-show="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings" />
 
 </template>
 
@@ -83,6 +83,12 @@ export default {
     },
     components: {
         SettingsModal
+    },
+    props:{
+        logged: Boolean,
+        login : String,
+        password : String,
+        id: Number,
     }
 }
 

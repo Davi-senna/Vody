@@ -10,7 +10,7 @@
             <form id="container-inputs" action="#">
                 <select name="category" id="category">
                     <option value="Selecione a categoria">Selecione a categoria</option>
-                    <option value="pattern">Padrão</option>
+                    <option v-for="category in categories" value="pattern">{{category.name}}</option>
                 </select>
                 <input type="number" min="0" name="hourValue" id="hourValue" placeholder="Valor hora">
                 <input id="modal-button" type="submit" value="Salvar">
@@ -21,10 +21,46 @@
 </template>
 
 <script>
-    export default{
-        name: "SettingsModal",
-        emits: ['exchangeVisibility']
-    }
+export default {
+    name: "SettingsModal",
+    data() {
+        categories: null
+    },
+    emits: ['exchangeVisibility'],
+    props: {
+        logged: Boolean,
+        login: String,
+        password: String,
+        id: Number
+    },
+    watch: {
+        logged(newlogged) {
+            if (newlogged) {
+                this.getCategories()
+            }
+        }
+    },
+    methods: {
+        
+        async getCategories() {
+            const request = await fetch(`http://localhost:8000/api/category/${this.id}/${this.login}/${this.password}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            })
+
+            const response = await request.json();
+
+            console.log(response)
+
+            if (response.success) {
+                this.categories = response.data
+            } else {
+                // this.error = "Usuário ou senha incorreta"
+                // this.reset()
+            }
+        }
+    },
+}
 </script>
 
 <style scoped>
@@ -97,13 +133,13 @@ option {
     cursor: pointer;
 }
 
-#modal-button{
+#modal-button {
     width: 60%;
     padding-left: 0;
     margin-bottom: 0;
 }
 
-#modal-button:hover{
+#modal-button:hover {
     background-color: var(--main-color);
     color: var(--secondary-color)
 }

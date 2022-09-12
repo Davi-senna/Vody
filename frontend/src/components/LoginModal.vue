@@ -31,6 +31,7 @@ export default {
             password: null,
             error: null,
             logged: false,
+            name: null
         }
     },
     methods: {
@@ -45,11 +46,12 @@ export default {
 
                 const response = await request.json();
 
-                console.log(response)
+                // console.log(response)
 
                 if (response.success) {
                     this.logged = true;
                     this.id = response.id;
+                    this.name = response.name;
                     this.$emit('exchangeVisibility')
                 } else {
                     this.error = "Usuário ou senha incorreta"
@@ -68,7 +70,7 @@ export default {
     },
     watch: {
         logged(){
-            this.$emit('situationExchangeLogged',{id: this.id, logins: this.login, password : this.password})
+            this.$emit('situationExchangeLogged',{id: this.id, login: this.login, password : this.password, name : this.name})
         },
     }
 }
