@@ -14,11 +14,14 @@
 
     <SettingsModal :logged = logged :login = login :password = password :id = id v-show="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings" />
 
+    <ConfirmLogModal />
+
 </template>
 
 <script>
 
 import SettingsModal from '@/components/SettingsModal.vue'
+import ConfirmLogModal from '@/components/ConfirmLogModal.vue'
 
 var interval
 
@@ -82,7 +85,8 @@ export default {
         }
     },
     components: {
-        SettingsModal
+        SettingsModal,
+        ConfirmLogModal
     },
     props:{
         logged: Boolean,
