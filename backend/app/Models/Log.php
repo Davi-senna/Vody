@@ -13,6 +13,6 @@ class Log extends Model
         'hour_value',
         'id_user',
         'id_category',
-        'status',
+        'seconds',
     ];
 }

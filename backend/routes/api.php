@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,5 @@ Route::post('/register',[UserController::class,'store'])->name('user.store');
 Route::get('/auth/{login}/{password}',[UserController::class,'auth'])->name('user.auth');
 
 Route::get('/category/{id}/{login}/{password}',[CategoryController::class,'show'])->name('category.show');
+
+Route::post('/log',[LogController::class,'store'])->name('log.store');
