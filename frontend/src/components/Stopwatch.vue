@@ -12,9 +12,9 @@
         </figure>
     </div>
 
-    <SettingsModal :logged = logged :login = login :password = password :id = id v-show="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings" />
+    <SettingsModal :logged = logged :login = login :password = password :id = id v-show="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings" @changeHourValue="changeHourValue" @changeCategory="changeCategory" />
 
-    <ConfirmLogModal />
+    <ConfirmLogModal :totalSeconds=totalSeconds :time=time :idCategory=idCategory :categoryName=categoryName :hourValue=hourValue v-show="confirmVisibility" @exchangeVisibility="exchangeVisibilityConfirm"/>
 
 </template>
 
@@ -29,13 +29,18 @@ export default {
     name: "Stopwatch",
     data() {
         return {
-            time: "00 : 00 : 00 ",
+            time: "00  : 00 : 00 ",
             hours: 0,
             minutes: 0,
             seconds: 0,
+            totalSeconds:0,
             stopwatchActive: false,
             settingsVisibility: false,
-            categories: null
+            confirmVisibility: false,
+            categories: null,
+            hourValue: null,
+            idCategory: null,
+            categoryName: null,
 
         }
     },
@@ -50,22 +55,24 @@ export default {
         setTimer() {
             if (this.seconds < 59) {
                 this.seconds += 1
+                this.totalSeconds += 1
                 this.format()
             } else if (this.seconds == 59 && this.minutes < 59) {
                 this.setZero("seconds")
                 this.minutes += 1
+                this.totalSeconds += 1
                 this.format()
             } else {
                 this.setZero("seconds", "minutes")
                 this.hours += 1
+                this.totalSeconds += 1
                 this.format()
             }
         },
         timeStop() {
             clearInterval(interval);
-            this.setZero("seconds", "minutes", "hours")
-            this.format()
-            this.stopwatchActive = false
+            this.confirmVisibility = true;
+            
         },
         setZero(seconds, minutes = "", hours = "") {
             if (seconds == "seconds") {
@@ -82,7 +89,18 @@ export default {
         },
         exchangeVisibilitySettings() {
             this.settingsVisibility = !this.settingsVisibility;
-        }
+        },
+        exchangeVisibilityConfirm() {
+            this.confirmVisibility = !this.confirmVisibility;
+            this.timeStart()
+        },
+        changeHourValue(params){
+            this.hourValue = params
+        },  
+        changeCategory(params){               
+            this.categoryName = params.categoryName;
+            this.idCategory = params.idCategory;
+        },
     },
     components: {
         SettingsModal,
@@ -93,7 +111,8 @@ export default {
         login : String,
         password : String,
         id: Number,
-    }
+    },
+    
 }
 
 </script>

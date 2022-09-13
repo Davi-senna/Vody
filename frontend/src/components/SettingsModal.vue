@@ -7,12 +7,13 @@
                 <span @click="$emit('exchangeVisibility')" id="modal-back">X</span>
             </div>
 
-            <form id="container-inputs" action="#">
-                <select name="category" id="category">
-                    <option value="Selecione a categoria">Selecione a categoria</option>
-                    <option v-for="category in categories" value="pattern">{{category.name}}</option>
+            <form @submit="categoryConfigure" id="container-inputs">
+                <select placeholder="Selecione a categoria" name="category" v-model="idCategory" id="category">
+                    <option disabled selected value="Selecione a categoria">Selecione a categoria</option>
+                    <option v-for="category in categories" :value=category.id>{{category.name}}</option>
                 </select>
-                <input type="number" min="0" name="hourValue" id="hourValue" placeholder="Valor hora">
+                <input type="number" min="0" name="hourValue" id="hourValue" v-model="hourValue"
+                    placeholder="Valor hora">
                 <input id="modal-button" type="submit" value="Salvar">
             </form>
         </div>
@@ -24,9 +25,14 @@
 export default {
     name: "SettingsModal",
     data() {
-        categories: null
+        return {
+            categories: null,
+            idCategory: "Selecione a categoria",
+            categoryName: null,
+            hourValue: null,
+        }
     },
-    emits: ['exchangeVisibility'],
+    emits: ['exchangeVisibility', 'changeIdCategory', 'changeHourValue'],
     props: {
         logged: Boolean,
         login: String,
@@ -38,10 +44,24 @@ export default {
             if (newlogged) {
                 this.getCategories()
             }
+        },
+
+        idCategory() {
+            this.categories.forEach(element => {
+                if(element.id == this.idCategory){
+                    this.categoryName = element.name
+                }
+            }); 
+            this.$emit("changeCategory", { idCategory: this.idCategory, categoryName: this.categoryName })            
+
+        },
+
+        hourValue() {
+            this.$emit("changeHourValue", this.hourValue)
         }
     },
     methods: {
-        
+
         async getCategories() {
             const request = await fetch(`http://localhost:8000/api/category/${this.id}/${this.login}/${this.password}`, {
                 method: "GET",
@@ -50,15 +70,15 @@ export default {
 
             const response = await request.json();
 
-            console.log(response)
-
             if (response.success) {
                 this.categories = response.data
-            } else {
-                // this.error = "Usuário ou senha incorreta"
-                // this.reset()
             }
-        }
+        },
+        categoryConfigure(e) {
+            e.preventDefault()
+            this.$emit('exchangeVisibility')
+        },
+
     },
 }
 </script>

@@ -8,19 +8,19 @@
             </div>
             <div class="modal-body">
                 <span>
-                    Tempo: 14h 35m 27s
+                    Tempo: {{time}}
                 </span>
 
                 <span>
-                    Categoria: Vody
+                    Categoria: {{categoryName != null?categoryName:"Não informada"}}
                 </span>
 
                 <span>
-                    Valor hora: 6 reais
+                    Valor hora: {{hourValue != null?hourValue.toLocaleString('pt-Br', { style: 'currency', currency: 'BRL' }):"Não informado"}}
                 </span>
 
                 <span>
-                    Valor total: 84 reais
+                    Valor total: {{hourValue != null?((totalSeconds/3600)*hourValue).toLocaleString('pt-Br', { style: 'currency', currency: 'BRL' }):"Informe o valor hora"}}
                 </span>
             </div>
             <div class="modal-footer">
@@ -34,7 +34,13 @@
 <script>
 export default {
     name: "ConfirmLogModal",
-
+    props:{
+        time: String,
+        hourValue: Number,
+        idCategory: Number,
+        totalSeconds : Number,
+        categoryName: String,
+    }
 }
 </script>
 
