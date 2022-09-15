@@ -24,7 +24,7 @@
                 </span>
             </div>
             <div class="modal-footer">
-                <input id="modal-button" type="submit" value="Confirmar">
+                <input @click="$emit('submitLog')" id="modal-button" type="submit" value="Confirmar">
             </div>
         </div>
     </div>
@@ -40,7 +40,10 @@ export default {
         idCategory: Number,
         totalSeconds : Number,
         categoryName: String,
-    }
+    },
+    emits:[
+        "submitLog"
+    ]
 }
 </script>
 

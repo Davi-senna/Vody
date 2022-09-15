@@ -14,7 +14,7 @@
 
     <SettingsModal :logged = logged :login = login :password = password :id = id v-show="settingsVisibility" @exchangeVisibility="exchangeVisibilitySettings" @changeHourValue="changeHourValue" @changeCategory="changeCategory" />
 
-    <ConfirmLogModal :totalSeconds=totalSeconds :time=time :idCategory=idCategory :categoryName=categoryName :hourValue=hourValue v-show="confirmVisibility" @exchangeVisibility="exchangeVisibilityConfirm"/>
+    <ConfirmLogModal :totalSeconds=totalSeconds :time=time :idCategory=idCategory :categoryName=categoryName :hourValue=hourValue v-show="confirmVisibility" @exchangeVisibility="exchangeVisibilityConfirm" @submitLog="submitLog"/>
 
 </template>
 
@@ -101,6 +101,39 @@ export default {
             this.categoryName = params.categoryName;
             this.idCategory = params.idCategory;
         },
+        async submitLog(){
+            if(this.id != null){
+                const log = {
+                    id_user : this.id,
+                    id_category : this.idCategory,
+                    password : this.password,
+                    login : this.login,
+                    seconds : this.totalSeconds,
+                    hour_value : this.hourValue,
+                }
+
+                const logJson = JSON.stringify(log)
+
+                const req = await fetch("http://localhost:8000/api/log", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: logJson
+                })
+
+                const resp = await req.json();
+
+                this.confirmVisibility = !this.confirmVisibility;
+                this.restart()
+            }else{  
+                alert("Faça login para concluir essa ação")
+            }            
+            
+        },
+        restart(){
+            this.setZero("seconds","minutes","hours")
+            this.format()
+            this.stopwatchActive = false
+        }
     },
     components: {
         SettingsModal,
