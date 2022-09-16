@@ -45,7 +45,7 @@ export default {
                 })
 
                 const response = await request.json();
-
+                console.log(response);
                 if (response.success) {
                     this.logged = true;
                     this.id = response.id;
