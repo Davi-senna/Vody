@@ -7,21 +7,21 @@
             <ul>
 
                 <li>
-                    <a href="" class="menu-item menu-link">
+                    <router-link to="/" class="menu-item menu-link">
                         Início
-                    </a>
+                    </router-link>
                 </li>
 
                 <li>
-                    <a href="" class="menu-item menu-link">
+                    <router-link to="/reports" class="menu-item menu-link">
                         Relatórios
-                    </a>
+                    </router-link>
                 </li>
 
                 <li>
-                    <a href="" class="menu-item menu-link">
+                    <router-link to="" class="menu-item menu-link">
                         Configurações
-                    </a>
+                    </router-link>
                 </li>
 
             </ul>

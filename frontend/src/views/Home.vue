@@ -1,14 +1,16 @@
 <template>
-    
-    
-    <Header @situationExchangeLogged="situationExchangeLogged"/>
-    <router-view/>
+
+    <section id="content">
+        <Date/>
+        <Stopwatch :logged = logged :login = login :password = password :id = id />
+    </section>
 
 </template>
 
 <script>
 
-    import Header from '@/components/Header.vue'
+    import Date from '@/components/Date.vue'
+    import Stopwatch from '@/components/Stopwatch.vue'
 
     export default{
         name: "App",
@@ -22,7 +24,8 @@
             }
         },
         components: {
-            Header
+            Date,
+            Stopwatch,
         },
         methods:{
             situationExchangeLogged(params){
