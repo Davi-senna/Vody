@@ -51,7 +51,7 @@ export default {
                     body: userJson
                 })
 
-                const resp = await req.json();
+                const resp = await req.json(); 
                 console.log(resp);
                 if(resp.success){
                     this.$emit('exchangeVisibility')
