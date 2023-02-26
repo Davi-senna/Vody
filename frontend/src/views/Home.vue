@@ -16,7 +16,7 @@ import Stopwatch from '@/components/Stopwatch.vue'
 import Header from '@/components/Header.vue'
 
 export default {
-    name: "App",
+    name: "Home",
     data() {
         return {
             logged: false,

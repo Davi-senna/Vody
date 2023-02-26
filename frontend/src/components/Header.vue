@@ -13,7 +13,7 @@
 
         <div id="menu-icon">
 
-            <a href="#" @click="menuVisibility=!menuVisibility">
+            <a @click="menuVisibility=!menuVisibility">
 
                 <div class="menu-row">
                     <div class="item-menu"></div>
@@ -91,6 +91,7 @@ export default {
     a:hover{
         text-decoration:none;
         color: var(--secondary-color);
+        cursor: pointer;
     }
 
     #soon{
