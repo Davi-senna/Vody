@@ -1,16 +1,23 @@
 <template>
-
     <Header @situationExchangeLogged="situationExchangeLogged" />
 
     <section id="content">
-        
-    </section>
+        <div id="left-reports">
+            <div id="top-panel">
 
+                <PanelReports />
+                <PanelReports />
+                <PanelReports />
+                
+            </div>
+        </div>
+    </section>
 </template>
 
 <script>
 
 import Header from '@/components/Header.vue'
+import PanelReports from '@/components/PanelReports.vue'
 
 export default {
     name: "Reports",
@@ -24,7 +31,8 @@ export default {
         }
     },
     components: {
-        Header
+        Header,
+        PanelReports
     },
     methods: {
         situationExchangeLogged(params) {
@@ -60,5 +68,10 @@ export default {
     height: 91vh;
     width: 100%;
     display: flex;
+}
+
+#left-reports {
+    height: 100%;
+    width: 72%;
 }
 </style>
