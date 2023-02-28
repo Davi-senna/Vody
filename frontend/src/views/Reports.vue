@@ -16,7 +16,7 @@
         </div>
 
         <div id="right-reports">
-            
+            <RegistryReports/>
         </div>
     </section>
 </template>
@@ -26,6 +26,7 @@
 import Header from '@/components/Header.vue'
 import PanelReports from '@/components/PanelReports.vue'
 import CategoryReports from '@/components/CategoryReports.vue'
+import RegistryReports from '@/components/RegistryReports.vue'
 
 export default {
     name: "Reports",
@@ -41,7 +42,8 @@ export default {
     components: {
         Header,
         PanelReports,
-        CategoryReports
+        CategoryReports,
+        RegistryReports
     },
     methods: {
         situationExchangeLogged(params) {
@@ -90,5 +92,11 @@ export default {
     justify-content: space-between;
     align-items: center;
     
+}
+
+#right-reports{
+    width: 28%;
+    height: 92%;
+    padding-top: 1%;
 }
 </style>
