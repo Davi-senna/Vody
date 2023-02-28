@@ -1,24 +1,27 @@
 <template>
+    <div id="category-reports">
 
-    <div class="small-reports">
-        
     </div>
-
 </template>
 
 <script>
+
 export default {
-    name: "PanelReports"
+
+    name: "CategoryReports",
+
 }
+
 </script>
 
 <style scoped>
 
-.small-reports{
-    height: 180px;
-    width: 31.2%;
+#category-reports{
+    height: 64%;
+    width: 100%;
     border: 2px solid var(--main-color);
     border-radius: 12px;
+    margin-top: 3.5%;
 }
 
 </style>

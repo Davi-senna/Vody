@@ -8,8 +8,15 @@
                 <PanelReports />
                 <PanelReports />
                 <PanelReports />
-                
+
             </div>
+
+            <CategoryReports/>
+            
+        </div>
+
+        <div id="right-reports">
+            
         </div>
     </section>
 </template>
@@ -18,6 +25,7 @@
 
 import Header from '@/components/Header.vue'
 import PanelReports from '@/components/PanelReports.vue'
+import CategoryReports from '@/components/CategoryReports.vue'
 
 export default {
     name: "Reports",
@@ -32,7 +40,8 @@ export default {
     },
     components: {
         Header,
-        PanelReports
+        PanelReports,
+        CategoryReports
     },
     methods: {
         situationExchangeLogged(params) {
@@ -72,6 +81,14 @@ export default {
 
 #left-reports {
     height: 100%;
-    width: 72%;
+    width: 70%;
+    padding: 2%;
+}
+
+#top-panel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
 }
 </style>
