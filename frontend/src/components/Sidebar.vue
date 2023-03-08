@@ -13,9 +13,10 @@
                 </li>
 
                 <li>
-                    <router-link to="/reports" class="menu-item menu-link">
+                    <router-link v-if="id != false"  :to="{name: 'reports', params: {teste: id}}" class="menu-item menu-link">
                         Relatórios
                     </router-link>
+                    <div @click="alertLogged()" v-if="id == false" id="reportsDisabled" class="menu-item menu-link">Relatórios</div>
                 </li>
 
                 <li>
@@ -57,6 +58,7 @@ export default {
             LoginVisibility: false,
             RegisterVisibility: false,
             logged: false,
+            id: false
         }
     },
     methods:{
@@ -73,9 +75,14 @@ export default {
         situationExchangeLogged(params){
             this.logged = !this.logged;
             this.$emit('situationExchangeLogged',params);
+            this.id = params.id;
             
+        },
+        alertLogged(){
+            alert('Faça login para acessar os seus relatórios');
         }
-    }
+    },
+
 }
 
 </script>
@@ -153,6 +160,7 @@ a:hover {
     justify-content: center;
     align-items: center;
     font-size: 20px;
+    cursor: pointer;
 }
 
 #menu-title {
