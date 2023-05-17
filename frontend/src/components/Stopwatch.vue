@@ -7,8 +7,7 @@
             <button @click="timeStop()" v-if="stopwatchActive" id="button-stop">Parar</button>
         </div>
         <figure>
-            <img @click="exchangeVisibilitySettings()" id="settings"
-                src="@/assets/img/configuration_control_gear_preferences_setting_settings_tools_icon_123195.png" alt="">
+            <img @click="exchangeVisibilitySettings()" id="settings" src="@/assets/img/configuration_control_gear_preferences_setting_settings_tools_icon_123195.png" alt="">
         </figure>
     </div>
 

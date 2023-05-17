@@ -13,7 +13,7 @@
                 </li>
 
                 <li>
-                    <router-link v-if="id != false"  :to="{name: 'reports', params: {teste: id}}" class="menu-item menu-link">
+                    <router-link v-if="id != false"  :to="{name: 'reports', params: {userId: id}}" class="menu-item menu-link">
                         Relatórios
                     </router-link>
                     <div @click="alertLogged()" v-if="id == false" id="reportsDisabled" class="menu-item menu-link">Relatórios</div>

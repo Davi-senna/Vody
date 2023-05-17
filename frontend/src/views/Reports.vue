@@ -5,9 +5,9 @@
         <div id="left-reports">
             <div id="top-panel">
 
-                <PanelReports />
-                <PanelReports />
-                <PanelReports />
+                <PanelReports day="today" textDescription="Hoje" />
+                <PanelReports day="week" textDescription="Essa semana" />
+                <PanelReports day="month" textDescription="Esse mês" />
 
             </div>
 
