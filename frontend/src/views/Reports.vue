@@ -82,7 +82,7 @@ export default {
 }
 
 #left-reports {
-    height: 100%;
+    height: 92%;
     width: 70%;
     padding: 2%;
 }
@@ -91,6 +91,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 32%;
     
 }
 
