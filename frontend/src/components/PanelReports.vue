@@ -20,7 +20,6 @@ export default {
   },
   methods: {
     imageValidate(day) {
-      console.log(this.day)
       if (this.day == day) {
         return true;
       } else {

@@ -1,21 +1,30 @@
-<template>
-    <div id="category">
-        
-    </div>
-</template>
+    <template>
+        <div id="category">
+            Petcare
+        </div>
+    </template>
 
-<script>
+    <script>
 
-export default {
+    export default {
 
-    name: "Category",
+        name: "Category"
 
-}
+    }
 
     </script>
 
-<style scoped>
+    <style scoped>
 
+    #category{
+        width: 100%;
+        height: 20%;
+        background-color: rgba(238, 238, 238, 1);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 0 3%;
+        margin-bottom: 3%;
+    }
 
-
-</style>
+    </style>
