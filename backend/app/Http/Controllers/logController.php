@@ -34,11 +34,37 @@ class LogController extends Controller
                 ];
 
                 return json_encode($validate);
-
             } else {
                 return json_encode([
                     "success" => false,
                     "message" => "Usuário invalido"
+                ]);
+            }
+        } catch (\Throwable $e) {
+            return json_encode([
+                "success" => false,
+                "message" => $e->getMessage()
+            ]);
+        };
+    }
+
+    public function show($id,$login,$password)
+    {
+        try {
+            $user = new UserController();
+
+            $authentication = json_decode($user->auth($login, $password));
+            if ($authentication->success) {
+
+                $result = Log::where(['id_user' => $id])->select('seconds','hour_value','created_at')->get();
+                return json_encode([
+                    "success" => true,
+                    "data" => $result
+                ]);
+            } else {
+                return json_encode([
+                    "success" => false,
+                    "message" => "Não foi possível encontrar esses logs"
                 ]);
             }
         } catch (\Throwable $e) {
