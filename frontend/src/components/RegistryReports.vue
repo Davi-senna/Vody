@@ -21,7 +21,6 @@ export default{
     width: 100%;
     border: 2px solid var(--main-color);
     border-radius: 12px;
-    margin-top: 3.5%;
 }
 
 

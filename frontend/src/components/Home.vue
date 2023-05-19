@@ -1,7 +1,5 @@
 <template>
 
-    <Header @situationExchangeLogged="situationExchangeLogged" />
-
     <section id="content">
         <Date />
         <Stopwatch :logged=logged :login=login :password=password :id=id />
@@ -13,34 +11,20 @@
 
 import Date from '@/components/Date.vue'
 import Stopwatch from '@/components/Stopwatch.vue'
-import Header from '@/components/Header.vue'
 
 export default {
     name: "Home",
-    data() {
-        return {
-            logged: false,
-            id: null,
-            name: null,
-            login: null,
-            password: null,
-        }
+    props:{
+        logged: Boolean,
+        id: Number,
+        name: String,
+        login: String,
+        password: String
     },
     components: {
         Date,
-        Stopwatch,
-        Header
-    },
-    methods: {
-        situationExchangeLogged(params) {
-            this.logged = !this.logged
-            this.id = params.id
-            this.name = params.name
-            this.login = params.login
-            this.password = params.password
-        }
+        Stopwatch
     }
-
 }
 
 </script>

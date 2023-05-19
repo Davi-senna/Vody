@@ -7,22 +7,22 @@
             <ul>
 
                 <li>
-                    <router-link to="/" class="menu-item menu-link">
+                    <div @click="changeView('home')" class="menu-item menu-link">
                         Início
-                    </router-link>
+                    </div>
                 </li>
 
                 <li>
-                    <router-link v-if="id != false"  :to="{name: 'reports', params: {userId: id}}" class="menu-item menu-link">
+                    <div @click="changeView('reports')" v-if="id != false" class="menu-item menu-link">
                         Relatórios
-                    </router-link>
+                    </div>
                     <div @click="alertLogged()" v-if="id == false" id="reportsDisabled" class="menu-item menu-link">Relatórios</div>
                 </li>
 
                 <li>
-                    <router-link to="" class="menu-item menu-link">
+                    <div to="" class="menu-item menu-link">
                         Configurações
-                    </router-link>
+                    </div>
                 </li>
 
             </ul>
@@ -47,8 +47,9 @@ export default {
     name: 'Sidebar',
     props: {
         visibility: Boolean,
+        currentView: String
     },
-    emits:['exchangeVisibility','situationExchangeLogged'],
+    emits:['exchangeVisibility','situationExchangeLogged','changeView'],
     components:{
         LoginModal,
         RegisterModal,
@@ -80,6 +81,9 @@ export default {
         },
         alertLogged(){
             alert('Faça login para acessar os seus relatórios');
+        },
+        changeView(view){
+            this.$emit('changeView',view);
         }
     },
 

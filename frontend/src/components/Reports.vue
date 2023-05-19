@@ -1,6 +1,4 @@
 <template>
-    <Header @situationExchangeLogged="situationExchangeLogged" />
-
     <section id="content">
         <div id="left-reports">
             <div id="top-panel">
@@ -14,7 +12,6 @@
             <CategoryReports/>
             
         </div>
-
         <div id="right-reports">
             <RegistryReports/>
         </div>
@@ -23,38 +20,24 @@
 
 <script>
 
-import Header from '@/components/Header.vue'
 import PanelReports from '@/components/PanelReports.vue'
 import CategoryReports from '@/components/CategoryReports.vue'
 import RegistryReports from '@/components/RegistryReports.vue'
 
 export default {
     name: "Reports",
-    data() {
-        return {
-            logged: false,
-            id: null,
-            name: null,
-            login: null,
-            password: null,
-        }
+    props:{
+        logged: Boolean,
+        id: Number,
+        name: String,
+        login: String,
+        password: String
     },
     components: {
-        Header,
         PanelReports,
         CategoryReports,
         RegistryReports
-    },
-    methods: {
-        situationExchangeLogged(params) {
-            this.logged = !this.logged
-            this.id = params.id
-            this.name = params.name
-            this.login = params.login
-            this.password = params.password
-        }
     }
-
 }
 
 </script>
@@ -79,25 +62,26 @@ export default {
     height: 91vh;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    padding: 0 2%;
+    align-items: center;
 }
 
 #left-reports {
     height: 92%;
     width: 70%;
-    padding: 2%;
-}
-
-#top-panel{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 32%;
-    
 }
 
 #right-reports{
     width: 28%;
     height: 92%;
-    padding-top: 1%;
 }
+
+#top-panel{
+    display: flex;
+    justify-content: space-between;
+    height: 32%;
+    
+}
+
 </style>

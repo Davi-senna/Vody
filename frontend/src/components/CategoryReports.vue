@@ -30,11 +30,11 @@ export default {
 <style scoped>
 
 #category-reports{
-    height: 69.5%;
+    margin-top: 3%;
+    height: 63%;
     width: 100%;
     border: 2px solid var(--main-color);
     border-radius: 12px;
-    margin-top: 3.5%;
     padding: 3%;
 }
 

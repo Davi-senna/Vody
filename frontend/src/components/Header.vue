@@ -38,7 +38,7 @@
         </div>
         
     </header>
-    <Sidebar @situationExchangeLogged="situationExchangeLogged" @exchangeVisibility="exchangeVisibilityMenu" :visibility=menuVisibility />
+    <Sidebar @changeView="modifyView" @situationExchangeLogged="situationExchangeLogged" @exchangeVisibility="exchangeVisibilityMenu" :visibility=menuVisibility :currentView=view />
     
 
 </template>
@@ -53,7 +53,10 @@ export default {
     components:{
         Sidebar
     },
-    emits: ['situationExchangeLogged'],
+    props:{
+        view: String
+    },
+    emits: ['situationExchangeLogged','changeView'],
     data(){
         return{
             menuVisibility : false
@@ -65,6 +68,9 @@ export default {
         },
         situationExchangeLogged(params){
             this.$emit('situationExchangeLogged',params);
+        },
+        modifyView(params){
+            this.$emit('changeView',params);
         }
     }
 }

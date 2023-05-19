@@ -35,7 +35,7 @@ export default {
 
 <style scoped>
 .small-reports {
-  height: 180px;
+  height: 100%;
   width: 31.2%;
   border: 2px solid var(--main-color);
   border-radius: 12px;
