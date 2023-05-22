@@ -7,7 +7,7 @@
 
       <span>{{ textDescription }}</span>
     </figure>
-    <span class="textDescription">R$ 350,00</span>
+    <span class="textDescription">{{ money }}</span>
   </div>
 </template>
   
@@ -16,7 +16,13 @@ export default {
   name: "PanelReports",
   props: {
     day: String,
-    textDescription: String
+    textDescription: String,
+    value: Number
+  },
+  data(){
+    return {
+      money: 0
+    };
   },
   methods: {
     imageValidate(day) {
@@ -26,8 +32,11 @@ export default {
         return false;
       }
     },
-
-
+  },
+  watch:{
+    value(newValue){
+      this.money = newValue.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+    }
   }
 };
 </script>

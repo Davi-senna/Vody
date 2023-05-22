@@ -1,7 +1,7 @@
 <template>
     <Header :view=currentView @changeView="changeView" @situationExchangeLogged="situationExchangeLogged" />
-    <Home :logged=logged :login=login :password=password :id=id v-show="this.currentView == 'home'"/>
-    <Reports :logged=logged :login=login :password=password :id=id v-show="this.currentView == 'reports'"/>
+    <Home @reloadReports="reloadReports" :logged=logged :login=login :password=password :id=id v-show="this.currentView == 'home'"/>
+    <Reports :reload=reload :logged=logged :login=login :password=password :id=id v-show="this.currentView == 'reports'"/>
 </template>
 
 <script>
@@ -18,7 +18,8 @@ export default {
             name: null,
             login: null,
             password: null,
-            currentView: 'home'
+            currentView: 'home',
+            reload: 0
         }
     },
     components: {
@@ -36,6 +37,9 @@ export default {
         },
         changeView(params){
             this.currentView = params;
+        },
+        reloadReports(){
+            this.reload += 1; 
         }
     }
 }

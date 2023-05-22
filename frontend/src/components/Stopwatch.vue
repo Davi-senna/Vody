@@ -122,7 +122,8 @@ export default {
                 const resp = await req.json();
 
                 this.confirmVisibility = !this.confirmVisibility;
-                this.restart()
+                this.restart();
+                this.$emit('reloadReports');
             }else{  
                 alert("Faça login para concluir essa ação")
             }            
@@ -144,6 +145,9 @@ export default {
         password : String,
         id: Number,
     },
+    emits:[
+        "reloadReports"
+    ]
     
 }
 

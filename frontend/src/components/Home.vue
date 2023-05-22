@@ -2,7 +2,7 @@
 
     <section id="content">
         <Date />
-        <Stopwatch :logged=logged :login=login :password=password :id=id />
+        <Stopwatch @reloadReports="$emit('reloadReports')" :logged=logged :login=login :password=password :id=id />
     </section>
 
 </template>
@@ -24,7 +24,10 @@ export default {
     components: {
         Date,
         Stopwatch
-    }
+    },
+    emits:[
+        'reloadReports'
+    ]
 }
 
 </script>
