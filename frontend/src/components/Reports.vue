@@ -56,7 +56,6 @@ export default {
         reload(){
             this.resetVariables()
             this.getLog();
-            console.log("foi");
         }
     },
     methods: {
