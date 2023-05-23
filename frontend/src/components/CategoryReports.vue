@@ -5,9 +5,7 @@
             <span id="button-add-category">Adicionar categoria +</span>
         </div>
         <div id="body-category-reports">
-            <Category />
-            <Category />
-            <Category />
+            <Category v-for="categorie in categories" />
         </div>
     </div>
 </template>
@@ -19,8 +17,34 @@ import Category from '@/components/Category.vue'
 export default {
 
     name: "CategoryReports",
-    components:{
+    components: {
         Category
+    },
+    props:{
+        login: String,
+        id: Number,
+        password: String
+    },
+    data(){
+        return{
+            categories: null
+        }
+    },
+    methods: {
+
+        async getCategories() {
+            const request = await fetch(`http://localhost:8000/api/category/${this.id}/${this.login}/${this.password}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            })
+
+            const response = await request.json();
+
+            if (response.success) {
+                this.categories = response.data
+            }
+        }
+
     }
 
 }
@@ -28,8 +52,7 @@ export default {
 </script>
 
 <style scoped>
-
-#category-reports{
+#category-reports {
     margin-top: 3%;
     height: 63%;
     width: 100%;
@@ -38,15 +61,15 @@ export default {
     padding: 3%;
 }
 
-#header-category-reports{
+#header-category-reports {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
 }
 
-#category-reports{
+#category-reports {
     font-family: 'Ubuntu', sans-serif;
     color: var(--main-color);
 }
@@ -55,14 +78,13 @@ export default {
     font-size: 20px;
 }
 
-#button-add-category{
+#button-add-category {
     font-size: 15px;
     cursor: pointer;
 }
 
-#body-category-reports{
+#body-category-reports {
     margin-top: 3%;
     height: 80%;
 }
-
 </style>

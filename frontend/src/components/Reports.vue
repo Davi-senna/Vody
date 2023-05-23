@@ -9,7 +9,7 @@
 
             </div>
 
-            <CategoryReports />
+            <CategoryReports :id=id :login=login :password=password />
 
         </div>
         <div id="right-reports">
