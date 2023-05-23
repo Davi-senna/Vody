@@ -5,7 +5,7 @@
             <span id="button-add-category">Adicionar categoria +</span>
         </div>
         <div id="body-category-reports">
-            <Category v-for="categorie in categories" />
+            <Category v-for="categorie in categories" :name=categorie.name />
         </div>
     </div>
 </template>
@@ -23,7 +23,8 @@ export default {
     props:{
         login: String,
         id: Number,
-        password: String
+        password: String,
+        logged: Boolean
     },
     data(){
         return{
@@ -39,12 +40,18 @@ export default {
             })
 
             const response = await request.json();
+            console.log(response);
 
             if (response.success) {
                 this.categories = response.data
             }
         }
 
+    },
+    watch:{
+        logged(){
+            this.getCategories()
+        }
     }
 
 }

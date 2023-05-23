@@ -1,6 +1,6 @@
     <template>
         <div id="category">
-            Petcare
+            {{name}}
         </div>
     </template>
 
@@ -8,7 +8,10 @@
 
     export default {
 
-        name: "Category"
+        name: "Category",
+        props:{
+            name: String
+        }
 
     }
 

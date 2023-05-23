@@ -9,7 +9,7 @@
 
             </div>
 
-            <CategoryReports :id=id :login=login :password=password />
+            <CategoryReports :id=id :login=login :password=password :logged=logged />
 
         </div>
         <div id="right-reports">
@@ -53,14 +53,14 @@ export default {
                 this.getLog()
             }
         },
-        reload(){
+        reload() {
             this.resetVariables()
             this.getLog();
         }
     },
     methods: {
         async getLog() {
-            
+
             const request = await fetch(`http://localhost:8000/api/log/${this.id}/${this.login}/${this.password}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -75,6 +75,17 @@ export default {
                     this.setValueInVariable(log);
                 }
                 this.logs = newLogs;
+                if (this.today <= 0) {
+                    this.today = "R$ 0,00"
+                }
+                if (this.week <= 0) {
+                    console.log(this.week);
+                    this.week = "R$ 0,00"
+                }
+                if (this.month <= 0) {
+                    console.log(this.month);
+                    this.month = "R$ 0,00"
+                }
             }
         },
         setValueInVariable(log) {
@@ -85,24 +96,23 @@ export default {
             var week = new Date();
 
             week.setDate(week.getDate() - 7);
-            oldDate.setDate(arrayDate[2]); 
-            oldDate.setMonth(parseInt(arrayDate[1]) -1);
+            oldDate.setDate(arrayDate[2]);
+            oldDate.setMonth(parseInt(arrayDate[1]) - 1);
             oldDate.setFullYear(arrayDate[0]);
 
-            if(oldDate.getTime() == currentDate.getTime()){
+            if (oldDate.getTime() == currentDate.getTime()) {
                 this.today += parseFloat(log.hour_value) * (parseInt(log.seconds) / 3600);
             }
 
-            if(oldDate.getTime() >= week.getTime()){
+            if (oldDate.getTime() >= week.getTime()) {
                 this.week += parseFloat(log.hour_value) * (parseInt(log.seconds) / 3600);
             }
 
-            if(oldDate.getMonth() == currentDate.getMonth() && oldDate.getFullYear() == currentDate.getFullYear()){
+            if (oldDate.getMonth() == currentDate.getMonth() && oldDate.getFullYear() == currentDate.getFullYear()) {
                 this.month += parseFloat(log.hour_value) * (parseInt(log.seconds) / 3600);
             }
-            
         },
-        resetVariables(){
+        resetVariables() {
             this.today = 0;
             this.week = 0;
             this.month = 0;
