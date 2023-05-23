@@ -35,7 +35,7 @@ export default {
   },
   watch:{
     value(newValue){
-      this.money = newValue.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+      this.money = newValue.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
     }
   }
 };
