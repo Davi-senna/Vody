@@ -78,23 +78,29 @@ export default {
             }
         },
         setValueInVariable(log) {
+
             var oldDate = new Date();
             var currentDate = new Date();
             var arrayDate = log.created_at.split("-");
             var week = new Date();
+
             week.setDate(week.getDate() - 7);
             oldDate.setDate(arrayDate[2]); 
             oldDate.setMonth(parseInt(arrayDate[1]) -1);
             oldDate.setFullYear(arrayDate[0]);
+
             if(oldDate.getTime() == currentDate.getTime()){
                 this.today += parseFloat(log.hour_value) * (parseInt(log.seconds) / 3600);
             }
+
             if(oldDate.getTime() >= week.getTime()){
                 this.week += parseFloat(log.hour_value) * (parseInt(log.seconds) / 3600);
             }
+
             if(oldDate.getMonth() == currentDate.getMonth() && oldDate.getFullYear() == currentDate.getFullYear()){
                 this.month += parseFloat(log.hour_value) * (parseInt(log.seconds) / 3600);
             }
+            
         },
         resetVariables(){
             this.today = 0;
