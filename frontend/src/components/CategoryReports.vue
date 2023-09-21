@@ -2,23 +2,26 @@
     <div id="category-reports">
         <div id="header-category-reports">
             <span id="title-category">Categorias</span>
-            <span id="button-add-category">Adicionar categoria +</span>
+            <span @click="exchangeVisibility" id="button-add-category">Adicionar categoria +</span>
         </div>
         <div id="body-category-reports">
             <Category v-for="categorie in categories" :name=categorie.name />
+            <AddCategoryModal v-if="addCategoryVisibility" @exchangeVisibility="exchangeVisibility"/>
         </div>
     </div>
 </template>
 
 <script>
 
-import Category from '@/components/Category.vue'
+import Category from '@/components/Category.vue';
+import AddCategoryModal from '@/components/AddCategoryModal.vue';
 
 export default {
 
     name: "CategoryReports",
     components: {
-        Category
+        Category,
+        AddCategoryModal
     },
     props:{
         login: String,
@@ -28,7 +31,8 @@ export default {
     },
     data(){
         return{
-            categories: null
+            categories: null,
+            addCategoryVisibility: false
         }
     },
     methods: {
@@ -43,8 +47,12 @@ export default {
             console.log(response);
 
             if (response.success) {
-                this.categories = response.data
+                this.categories = response.data;
             }
+        },
+
+        exchangeVisibility() { 
+            this.addCategoryVisibility = !this.addCategoryVisibility;
         }
 
     },

@@ -53,6 +53,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.8);
     width: 100vw;
     height: 91vh;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;

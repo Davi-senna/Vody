@@ -3,16 +3,14 @@
     <div id="container-modal">
         <div id="modal">
             <div id="modal-header">
-                <span id="modal-title">Fazer Cadastro</span>
+                <span id="modal-title">Adicionar categoria</span>
                 <span @click="$emit('exchangeVisibility')" id="modal-back">X</span>
             </div>
 
-            <form id="container-inputs" @submit="userRegister">
-                <input type="text" name="name" id="name" v-model="name" placeholder="Nome completo">
-                <input type="text" name="login" id="login" v-model="login" placeholder="Login">
-                <input type="password" name="password" id="password" v-model="password" placeholder="Senha">
-                <input id="modal-button" type="submit" value="Entrar">
-                <span class="error" v-if="error!=null">{{error}}</span>
+            <form @submit="auth" id="container-inputs">
+                <input type="text" name="nome" id="nome" v-model="nome" placeholder="Nome da categoria">
+                <span class="error" v-if="error!=null">{{error}}</span> 
+                <input id="modal-button" type="submit" value="Adicionar">
             </form>
 
         </div>
@@ -22,52 +20,53 @@
 
 <script>
 export default {
-    name: "SettingsModal",
-    emits: ['exchangeVisibility'],
+    name: "AddCategoryModal",
+    emits: ['exchangeVisibility', 'register','situationExchangeLogged'],
     data() {
         return {
-            "name": null,
-            "login": null,
-            "password": null,
-            "error" : null,
+            id: null,
+            login: null,
+            password: null,
+            error: null,
+            logged: false,
+            name: null
         }
     },
     methods: {
-        async userRegister(e) {
+        async auth(e) {
             e.preventDefault();
-            if (this.name != null && this.login != null && this.password != null) {
-                const user = {
-                    name: this.name,
-                    login: this.login,
-                    password: this.password,
-                    status: true
-                }
+            if (this.login != null && this.password != null) {
 
-                const userJson = JSON.stringify(user)
-
-                const req = await fetch("http://localhost:8000/api/register", {
-                    method: "POST",
+                const request = await fetch(`http://localhost:8000/api/auth/${this.login}/${this.password}`, {
+                    method: "GET",
                     headers: { "Content-Type": "application/json" },
-                    body: userJson
                 })
 
-                const resp = await req.json(); 
-                if(resp.success){
+                const response = await request.json();
+                if (response.success) {
+                    this.logged = true;
+                    this.id = response.id;
+                    this.name = response.name;
                     this.$emit('exchangeVisibility')
-                }else{
-                    this.error = "Usuário já existe"
+                } else {
+                    this.error = "Usuário ou senha incorreta"
                     this.reset()
                 }
-            }else{
+
+            } else {
                 this.error = "Preencha todos os campos"
-                this.reset()
             }
+
         },
-        reset(){
-            this.name = null
+        reset() {
             this.login = null
             this.password = null
         }
+    },
+    watch: {
+        logged(){
+            this.$emit('situationExchangeLogged',{id: this.id, login: this.login, password : this.password, name : this.name})
+        },
     }
 }
 </script>
@@ -77,14 +76,15 @@ export default {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
     width: 100vw;
-    height: 91vh;
+    height: 100vh;
     left: 0;
+    top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Ubuntu', sans-serif;
     color: var(--main-color);
-    z-index: 101;
+    z-index: 100;
 }
 
 #modal {
@@ -94,7 +94,7 @@ export default {
     animation-name: modal;
     animation-duration: 0.3s;
     width: 450px;
-    height: 380px;
+    height: 320px;
 
 }
 
@@ -110,6 +110,10 @@ export default {
     }
 }
 
+a {
+    margin-top: 10px
+}
+
 a:hover {
     cursor: pointer;
 }
@@ -121,27 +125,27 @@ a:hover {
     font-size: 20px;
 }
 
+.error {
+    color: red;
+}
+
 #container-inputs {
-    margin-top: 30px;
+    margin-top: 60px;
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     flex-direction: column;
+    height: 150px;
 }
 
 select,
 input {
     width: 90%;
-    height: 6vh;
+    height: 45px;
     border-radius: 5px;
     padding-left: 20px;
     border: 1px solid;
-    margin-bottom: 25px;
-}
-
-.error{
-    margin: 5px 0;
-    color: red;
 }
 
 option {
