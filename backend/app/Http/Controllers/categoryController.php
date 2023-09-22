@@ -27,7 +27,41 @@ class CategoryController extends Controller
         }
     }
 
-    public function store(Request $request){
-        
+    public function store(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'id_user' => 'required|max:20',
+                'password' => 'required|max:128',
+                'login' => 'required|max:128',
+                'name' => 'required|max:128',
+            ]);
+
+            $user = new UserController();
+
+            $authentication = json_decode($user->auth($validatedData["login"], $validatedData["password"]));
+            if ($authentication->success) {
+
+                $show = Category::create($validatedData);
+
+                $validate = [
+                    'success' => true,
+                    'message' => 'Categoria criada com sucesso',
+                    'id' => $show['id'],
+                ];
+
+                return json_encode($validate);
+            } else {
+                return json_encode([
+                    "success" => false,
+                    "message" => "Usuário invalido"
+                ]);
+            }
+        } catch (\Throwable $e) {
+            return json_encode([
+                "success" => false,
+                "message" => $e->getMessage()
+            ]);
+        };
     }
 }

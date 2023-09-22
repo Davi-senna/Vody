@@ -27,6 +27,8 @@ Route::get('/auth/{login}/{password}',[UserController::class,'auth'])->name('use
 
 Route::get('/category/{id}/{login}/{password}',[CategoryController::class,'show'])->name('category.show');
 
+Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+
 Route::post('/log',[LogController::class,'store'])->name('log.store');
 
 Route::get('/log/{id_user}/{login}/{password}',[LogController::class,'show'])->name('log.show');
